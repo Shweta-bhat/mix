@@ -1,0 +1,27 @@
+@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+ 
+	    http.csrf(c -> c.disable())
+ 
+	        .authorizeHttpRequests(request -> request
+	        	.requestMatchers("/admin/static/css/**", "/admin/static/plugins/**", "/admin/static/js/**", "/admin/static/images/**",  "/admin/static/webjars/**").permitAll()
+	        	.requestMatchers("/user/static/**", "/user/static/js/**","/user/static/css/**").permitAll()
+	        	.requestMatchers("/static/css/assets/**","static/css/vendors/**").permitAll()
+	        	.requestMatchers("/adminHome").hasAuthority("ADMIN")
+	            .requestMatchers("/userHome").hasAuthority("USER")
+	            .requestMatchers("/", "/userLogin", "/logout", "/register", "/sendOTP/{email}", "/forgetPassword", "resetPassword").permitAll()  // Allow public access for login and logout
+	            // .requestMatchers("/viewProfileDetail").hasAuthority("ADMIN")  // Allow admins to access viewProfileDetail
+	            //.requestMatchers("/admin/static/**").permitAll()  // Allow access to static resources under /admin/static/**
+	            .anyRequest().authenticated())  // Require authentication for all other requests
+ 
+	        .formLogin(form -> form
+	            .loginPage("/userLogin").loginProcessingUrl("/userLogin")
+	            .successHandler(new CustomSuccessHandler()).permitAll())
+ 
+	        .logout(form -> form
+	            .invalidateHttpSession(true).clearAuthentication(true)
+	            .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+	            .logoutSuccessUrl("/userLogin?logout").permitAll());
+ 
+	    return http.build();
+	}
