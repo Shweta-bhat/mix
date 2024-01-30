@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+    <!-- Add any necessary CSS styles here -->
+</head>
+
+<body>
+
+    <h1>Feedback Page</h1>
+
+    <div id="suggestion-block">
+        <h2>Suggestions</h2>
+        <textarea id="feedback-suggestion" rows="4" cols="50" placeholder="Enter your suggestion here"></textarea>
+    </div>
+
+    <button id="send-feedback-btn">Send Feedback</button>
+
+    <!-- Add any necessary JavaScript scripts here -->
+    <script>
+        document.getElementById("send-feedback-btn").addEventListener("click", function () {
+            // Get the feedback suggestion from the textarea
+            var feedbackSuggestion = document.getElementById("feedback-suggestion").value;
+
+            // Make a POST request to /submit-feedback
+            fetch('/submit-feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ suggestion: feedbackSuggestion }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response
+                console.log('Response:', data);
+                
+                // Show alert and redirect on success
+                if (data.success) {
+                    alert('Feedback sent!');
+                    window.location.href = 'u_dashboard';
+                } else {
+                    alert('Error submitting feedback. Please try again.');
+                }
+                
+                
+                
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

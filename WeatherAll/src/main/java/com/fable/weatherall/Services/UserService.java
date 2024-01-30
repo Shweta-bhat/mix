@@ -16,5 +16,9 @@ public interface UserService {
 	 List<String> addMultipleUsers(List<UserDTO> userDTOList);
 	 
 	 String updateUser(int userId, UserDTO userDTO);
+	 //changes
 
+	 User findByEmail(String email);
+	 String updateUserByEmail(String email, UserDTO userDTO);
+	
 }

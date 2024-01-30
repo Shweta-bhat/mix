@@ -69,6 +69,7 @@ public class UserIMPL implements UserService {
             return "User not found";
         }
     }
+    
     @Override
     public List<User> findAllUsers() {
         return userRepo.findAll();
@@ -96,6 +97,32 @@ public class UserIMPL implements UserService {
         }
         
     }
+    
+    //changes
+    @Override
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
+
+    @Override
+    public String updateUserByEmail(String email, UserDTO userDTO) {
+        User user = userRepo.findByEmail(email);
+
+        if (user != null) {
+            // Update user information
+            user.setUsername(userDTO.getUsername());
+            user.setEmail(userDTO.getEmail());
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+
+            userRepo.save(user);
+
+            return user.getUsername();
+        } else {
+            return "User not found";
+        }
+    }
+    
+
 }
 
 

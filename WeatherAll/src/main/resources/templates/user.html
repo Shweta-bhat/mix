@@ -505,7 +505,7 @@ https://templatemo.com/tm-590-topic-listing
 
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <a class="navbar-brand" href="/user_dashboard">
+                    <a class="navbar-brand" href="/u_dashboard">
                       <!--  <i class="bi-back"></i> -->
                       <img class = "Fablelogo" src="/user_dashboard/images/Logo.png" alt="Weather Fable Logo" width="40" height="40">
                         <span>Weather Fable</span>
@@ -577,14 +577,14 @@ https://templatemo.com/tm-590-topic-listing
                             <div class="dropdown" id="dropdowni">
                                 <i class="fas fa-user-circle" id="dropdownMenuLink"></i> 
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#user-profile">User Profile</a>
-                                    <a class="dropdown-item" href="#switch-account">Switch Account</a>
-                                    <a class="dropdown-item" href="#api-calls">API Calls</a>
-                                    <a class="dropdown-item" href="#recent-locations">Recent Locations</a>
+                                    <a class="dropdown-item" href="#user-profile" id="user-profile-link">User Profile</a>
+                                    <a class="dropdown-item" href="#switch-account" id="switch-account-link">Switch Account</a>
+                                   <!-- <a class="dropdown-item" href="#api-calls">API Calls</a>
+                                    <a class="dropdown-item" href="#recent-locations">Recent Locations</a> 
+                                     <a class="dropdown-item" href="#help-support">Help & Support</a>  --> 
                                     <a class="dropdown-item" href="#settings">Settings & Preferences</a>
-                                    <a class="dropdown-item" href="#sign-out">Sign Out</a>
-                                    <a class="dropdown-item" href="#help-support">Help & Support</a>
-                                    <a class="dropdown-item" href="#feedback">Send Feedback</a>
+                                    <a class="dropdown-item" href="#sign-out" id="sign-out-link">Sign Out</a>
+                                    <a class="dropdown-item" href="#feedback" id="sendfeedback-link">Send Feedback</a>
                                 </div>
                             </div>
                         </div> 
@@ -1550,9 +1550,34 @@ https://templatemo.com/tm-590-topic-listing
                 </div>
             </div>
         </footer>
+        
+        
+		<!-- changes done -->
+		<script>
+    document.getElementById("user-profile-link").addEventListener("click", function () {
+        window.location.href = "/u_profile";
+    });
 
+    document.getElementById("switch-account-link").addEventListener("click", function () {
+        window.location.href = "/userlogin";
+    });
+
+    document.getElementById("sign-out-link").addEventListener("click", function () {
+        window.location.href = "/home";
+    });
+    
+    document.getElementById("sendfeedback-link").addEventListener("click", function () {
+        window.location.href = "/feedback";
+    });
+    
+    
+</script>
+		
+		<!-- changes done -->
 
         <!-- JAVASCRIPT FILES -->
+        
+
 
         <script src="/user_dashboard/js/jquery.min.js"></script>
         <script src="/user_dashboard/js/bootstrap.bundle.min.js"></script>

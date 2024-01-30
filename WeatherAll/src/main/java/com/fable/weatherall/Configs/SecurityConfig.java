@@ -17,15 +17,15 @@ import com.fable.weatherall.Services.CustomUserDetailsService;
 
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfig {
 	
 	
-	@Autowired
-	CustomSuccessHandler customSuccessHandler;
-	
-	@Autowired
-	CustomUserDetailsService customUserDetailsService;
+//	@Autowired
+//	CustomSuccessHandler customSuccessHandler;
+//	
+//	@Autowired
+//	CustomUserDetailsService customUserDetailsService;
 	
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
@@ -33,35 +33,36 @@ public class SecurityConfig {
 	}
 	
 	
-	 @Bean
-	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-	        http.csrf(c -> c.disable())
-	        .authorizeHttpRequests(request -> request
-	                .requestMatchers("/home", "/signup","/userlogin", "/login","/admin/authenticate","/Homepage/images/**","/api/config","/Signup/**","/Login/**","/admin/registerAdmin","/save").permitAll()
-	                .requestMatchers("/getfoods/**","/clothing/**","/outdoor/**","/travel/**").permitAll()
+//	 @Bean
+//	    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//
+//	        http.csrf(c -> c.disable())
+//	        .authorizeHttpRequests(request -> request
+//	                .requestMatchers("/home", "/signup","/userlogin", "/login","/admin/authenticate","/Homepage/images/**","/api/config","/Signup/**","/Login/**","/admin/registerAdmin","/save").permitAll()
+//	                .requestMatchers("/user_dashboard","/admin","/u_dashboard","/getfoods/**","/clothing/**","/outdoor/**","/travel/**").permitAll()
 //	                .requestMatchers("/login","/u_dashboard").authenticated()
-	                .requestMatchers("/u_dashboard").hasAuthority("user")
-	                .requestMatchers("/admin/**").hasAuthority("admin")
-	                .anyRequest().authenticated())
-	        
-	            .formLogin(form -> form
-	                .loginPage("/userlogin").loginProcessingUrl("/userlogin")
-	                .successHandler(new CustomSuccessHandler()).permitAll());
-	        
-//	            .logout(form -> form
-//	                .invalidateHttpSession(true).clearAuthentication(true)
-//	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//	                .logoutSuccessUrl("/login?logout").permitAll());
-
-	        return http.build();
-
-	    }
-	
-	
-	@Autowired
-	public void configure (AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
-	}
+//	                .requestMatchers("/u_dashboard").hasAuthority("user")
+//	                .requestMatchers("/admin/**").hasAuthority("admin")
+//	                .anyRequest().authenticated())
+//	        
+//	            .formLogin(form -> form
+//	                .loginPage("/userlogin").loginProcessingUrl("/userlogin")
+//	                .successHandler(new CustomSuccessHandler()).permitAll());
+//	        
+////	        .logout(form -> form
+////	                .invalidateHttpSession(true).clearAuthentication(true)
+////	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+////	                .logoutSuccessUrl("/login?logout").permitAll());
+//
+//	        return http.build();
+//
+//
+//	    }
+//	
+//	
+//	@Autowired
+//	public void configure (AuthenticationManagerBuilder auth) throws Exception {
+//		auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
+//	}
 
 }
